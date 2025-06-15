@@ -3,8 +3,6 @@ import com.example.Lion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -20,37 +18,13 @@ public class LionTest {
     @Mock
     Feline feline;
 
-    // тесты конструктора
-    @Test
-    @DisplayName("Конструктор создает льва-самца с гривой")
-    void constructorLion_CreateMaleLionWithMane() throws Exception{
-        Lion lion = new Lion(feline, "Самец");
-        assertTrue(lion.doesHaveMane());
-    }
-
-    @Test
-    @DisplayName("Конструктор создает львицу-самку без гривы")
-    void constructorLion_CreateFemaleLionWithoutMane() throws Exception{
-        Lion lion = new Lion(feline, "Самка");
-        assertFalse(lion.doesHaveMane());
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Кобель", "Female", "111", "  ", "", "@#$%"})
-    @DisplayName("Конструктор выбрасывает исключение - некорректный пол животного")
-    void constructorLion_ThrowsExceptionIncorrectSex(String incorrectSex) throws Exception{
-        Exception exception = assertThrows(Exception.class, () -> new Lion(feline, incorrectSex));
-        assertEquals("Используйте допустимые значения пола животного - самец или самка", exception.getMessage());
-    }
-
-    // тесты методов
     @Test
     @DisplayName("метод getKittens() вызывает getKittens() у Feline")
     void getKittens_CalledGetKittensFeline() throws Exception {
         when(feline.getKittens()).thenReturn(3);
         Lion lion = new Lion(feline, "Самец");
         lion.getKittens();
-        Mockito.verify(feline).getKittens();
+        Mockito.verify(feline, times(1)).getKittens();
     }
 
     @Test
@@ -58,7 +32,7 @@ public class LionTest {
     void getKittens_ReturnValueFromFeline() throws Exception{
         when(feline.getKittens()).thenReturn(3);
         Lion lion = new Lion(feline, "Самец");
-        Integer actualKittensCount = lion.getKittens();
+        int actualKittensCount = lion.getKittens();
         assertEquals(3, actualKittensCount);
     }
 

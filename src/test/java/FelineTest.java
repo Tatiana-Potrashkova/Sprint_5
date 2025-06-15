@@ -22,7 +22,7 @@ public class FelineTest {
     void eatMeat_ReturnedFoodForPredator() throws Exception {
         List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
         List<String> actualFood = feline.eatMeat();
-        assertEquals(expectedFood, actualFood, "Возвращается список еды для хищника");
+        assertEquals(expectedFood, actualFood);
     }
 
     @Test
@@ -38,20 +38,20 @@ public class FelineTest {
     void getFamily_ReturnFeline() {
         String expectedFamily = "Кошачьи";
         String actualFamily = feline.getFamily();
-        assertEquals(expectedFamily, actualFamily, "getFamily() возвращает 'Кошачьи'");
+        assertEquals(expectedFamily, actualFamily);
     }
 
     @Test
     @DisplayName("метод getKittens(3) возвращает 3 котенка")
     void getKittens_WithParam3_Return3() {
-        Integer actualKittensCount = feline.getKittens(3);
+        int actualKittensCount = feline.getKittens(3);
         assertEquals(3, actualKittensCount);
     }
 
     @Test
     @DisplayName("метод getKittens() без параметров возвращает 1 котенка")
     void getKittens_NoParam_Return1() {
-        Integer actualKittensCount = feline.getKittens();
+        int actualKittensCount = feline.getKittens();
         assertEquals(1, actualKittensCount);
     }
 

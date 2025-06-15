@@ -16,9 +16,10 @@ import static org.mockito.Mockito.times;
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Тесты класса Cat")
 public class CatTest {
+    Cat cat;
+
     @Mock
     Feline feline;
-    Cat cat;
 
     @BeforeEach
     void beforeEach() {
@@ -27,10 +28,10 @@ public class CatTest {
 
     @Test
     @DisplayName("метод getSound() всегда возвращает 'Мяу'")
-    void getSound_ReturnMeow() {
+    void getSound_ReturnMeow(){
         String expectedSound = "Мяу";
         String actualSound = cat.getSound();
-        assertEquals(expectedSound, actualSound, "getSound() возвращает 'Мяу'");
+        assertEquals(expectedSound, actualSound);
     }
 
     @Test
@@ -39,7 +40,7 @@ public class CatTest {
         List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
         Mockito.when(feline.eatMeat()).thenReturn(expectedFood);
         List<String> actualFood = cat.getFood();
-        assertEquals(expectedFood, actualFood, "Возвращается список еды для хищника");
+        assertEquals(expectedFood, actualFood);
     }
 
     @Test
